@@ -1,0 +1,56 @@
+
+
+import java.util.Stack;
+
+public class CalculateMaxInStr {
+
+	static Stack<Integer> stack1 = new Stack<Integer>();
+
+	static int i=0;
+	static int maxCount = 0;
+
+	public static void main(String[] args) {
+
+		calculateSub(new int[]{0,0,0,1,0,0,0,1,1});
+	
+	}
+
+	private static void calculateSub(int[] array)
+	{
+		int localCount=0;
+		while(i<array.length-1)
+		{
+			stack1.empty();
+			while(array[i]==0)
+			{
+				stack1.push(array[i]);
+				i++;
+			}
+
+			while(array[i] == 1)
+			{
+				if(!stack1.empty())
+				{
+					stack1.pop();
+					localCount++;
+					if(stack1.empty())
+					{
+						if(maxCount<localCount)
+						{
+							maxCount = localCount;
+						}
+						localCount = 0;
+						break;
+					}
+				}
+				i++;
+				maxCount = localCount;
+				break;
+			}
+			
+
+		}
+		System.out.println(maxCount);
+	}
+
+}
