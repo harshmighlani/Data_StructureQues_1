@@ -1,0 +1,55 @@
+package adobe;
+
+class LinkedListReverse {
+
+	Node head;
+
+	static class Node {
+		int data;
+		Node next;
+		Node(int d) {data = d;}
+	}
+
+	Node reverseList(Node current, Node previous) {
+		if (current.next == null) {
+			head = current;
+
+			current.next = previous;
+			return null;
+		}
+		Node next1 = current.next;
+
+		current.next = previous;
+		reverseList(next1, current);
+
+		return head;
+	}
+
+	void printList(Node node) {
+		do {
+			System.out.println(node.data + " - > ");
+			node = node.next;
+		} while (node.next != null);
+	}
+
+	public static void main(String[] args) {
+		LinkedListReverse list = new LinkedListReverse();
+		list.head = new Node(1);
+		list.head.next = new Node(2);
+		list.head.next.next = new Node(3);
+		list.head.next.next.next = new Node(4);
+		list.head.next.next.next.next = new Node(5);
+		list.head.next.next.next.next.next = new Node(6);
+		list.head.next.next.next.next.next.next = new Node(7);
+		list.head.next.next.next.next.next.next.next = new Node(8);
+
+		System.out.println("Original Linked list ");
+		list.printList(list.head);
+		Node res = list.reverseList(list.head, null);
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Reversed linked list ");
+		list.printList(res);
+
+	}
+}
